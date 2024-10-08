@@ -1,7 +1,19 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['usuario'])) {
+if (isset($_SESSION['usuario'])) {
+    if (isset($_SESSION['nombre_completo'])) {
+        $nombre_completo = $_SESSION['nombre_completo'];
+    } else {
+        $nombre_completo = '';
+    }
+
+    if (isset($_SESSION['correo'])) {
+        $correo = $_SESSION['correo'];
+    } else {
+        $correo = '';
+    }
+} else {
     echo '
             <script>
                 alert("Debes iniciar sesión para acceder a esta página");
@@ -111,10 +123,98 @@ if (!isset($_SESSION['usuario'])) {
         </div>
     </div>
 
+    <div class="formulario" style="margin-left: 230px">
+        <form>
+            <div>
+                <label for="gender">Género:</label>
+                <select id="gender" name="gender">
+                    <option value="male">Hombre</option>
+                    <option value="female">Mujer</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="title">Título:</label>
+                <select id="title" name="title">
+                    <option value="mr">Sr.</option>
+                    <option value="mrs">Sra.</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="name">Nombre completo:</label>
+                <input type="text" id="name" name="nombre_completo" value="<?php echo $nombre_completo; ?>" disabled>
+            </div>
+
+            <div>
+                <label for="location">Ubicación:</label>
+                <div id="map" style="width: 60%; height: 400px;"></div>
+                <input type="hidden" id="city" name="city">
+                <input type="hidden" id="state" name="state">
+                <input type="hidden" id="country" name="country">
+                <input type="hidden" id="postcode" name="postcode">
+            </div>
+
+            <div>
+                <label for="coordinates">Coordenadas:</label>
+                <input type="text" id="latitude" name="latitude">
+                <input type="text" id="longitude" name="longitude">
+            </div>
+
+            <div>
+                <label for="timezone">Zona horaria:</label>
+                <input type="text" id="offset" name="offset">
+                <input type="text" id="description" name="description">
+            </div>
+
+            <div>
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="correo" value="<?php echo $correo; ?>" disabled>
+            </div>
+
+            <div>
+                <label for="dob">Fecha de nacimiento:</label>
+                <input type="date" id="dob" name="dob" max="<?php echo date('Y-m-d'); ?>">
+                <input type="text" id="age" name="age" placeholder="Edad" disabled>
+            </div>
+
+            <div>
+                <label for="identifier">Identificador:</label>
+                <input type="text" id="identifier" name="identifier" placeholder="0424, 0412, etc.">
+            </div>
+
+            <div>
+                <label for="phone">Teléfono móvil:</label>
+                <input type="text" id="phone" name="phone">
+            </div>
+
+            <div>
+                <label for="house_phone">Teléfono de casa:</label>
+                <input type="text" id="house_phone" name="house_phone">
+            </div>
+
+            <div>
+                <label for="picture">Foto:</label>
+                <input type="file" id="picture" name="picture">
+            </div>
+
+            <div>
+                <label for="nationality">Nacionalidad:</label>
+                <select id="nationality" name="nationality">
+                </select>
+            </div>
+        </form>
+    </div>
 
 
 
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script src="mapa.js"></script>
     <!-- Script to update colors on all pages -->
     <script>
         function updateColorsOnAllPages() {
