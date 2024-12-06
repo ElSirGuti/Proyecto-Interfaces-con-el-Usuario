@@ -1,0 +1,56 @@
+
+@keyframes tb2_move {
+    0%{     
+        transform: translateY(39.1px) translateX(23.5px) rotateZ(180deg);/* Inicial trapecio */
+    }
+    7%{
+        transform: translateY(39.1px) translateX(50px) rotateZ(180deg);/* Inicial trapecio sale*/
+    }
+    14%{
+        transform: translateY(39.1px) translateX(80px) rotateZ(135deg);/* Rota a cometa */
+    }
+    21%{
+        transform: translateY(-5px) translateX(80px) rotateZ(135deg);/* Movimiento a cometa */
+    }
+    28%{
+        transform: translateY(-5px) translateX(65px) rotateX(0deg) rotateY(0deg) rotateZ(135deg);/* Inicial a cometa */
+    }
+    35%{
+        transform: translateY(-5px) translateX(65px) rotateX(0deg) rotateY(0deg) rotateZ(135deg);/* Inicial a cometa */
+    }
+    42%{
+        transform: translateY(45px) translateX(95px) rotateX(0deg) rotateY(0deg) rotateZ(135deg);/* Inicial cometa sale*/
+    }
+    49%{
+        transform: translateY(45px) translateX(95px) rotateX(0deg) rotateY(0deg) rotateZ(200deg)/* Rota a persona */
+    }
+    56%{
+        transform: translateY(45px) translateX(0px) rotateX(0deg) rotateY(0deg) rotateZ(200deg)/* Se mueve a persona */
+    }
+    63%{
+        transform: translateY(75px) translateX(0px) rotateZ(200deg); /* Inicial persona */
+    }    
+    70%{ 
+        transform: translateY(75px) translateX(0px) rotateZ(200deg); /* Inicial persona */
+    }
+    77%{ 
+        transform: translateY(-55px) translateX(0px) rotateZ(200deg); /* Persona sale */
+    }
+    84%{ 
+        transform: translateY(-55px) translateX(00px) rotateZ(180deg);/* Rota a trapecio */
+    }
+    91%{ 
+        transform: translateY(39.1px) translateX(60px) rotateZ(180deg);/* Movimiento a trapecio */
+    }
+    100%{ 
+        transform: translateY(39.1px) translateX(23.5px) rotateZ(180deg);/* Inicial trapecio */
+    }
+}
+
+
+
+.tangrambtriangulo2 {
+    animation: tb2_move 12s infinite;
+    animation-delay: 2s;
+}
+

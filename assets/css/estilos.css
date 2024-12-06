@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+@font-face {
+    font-family: 'CustomFont';
+    src: url('Poppins-Regular.ttf') format('truetype');
+}
 
 :root{
     --primary:#f9d806;
     --tertiary:#ffee80;
     --secondary:#130F40;
     --cuaternary:#666;
+    --background:#fff;
     --border:.1rem solid rgba(0,0,0,.1);
     --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
 }
@@ -14,7 +18,7 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'CustomFont', sans-serif;
 }
 
 body{
@@ -53,7 +57,7 @@ main{
 /* Texto Caja trasera */
 .caja__trasera div{
     margin: 100px 40px;
-    color: white;
+    color: var(--background);
     transition: all 500ms;
 }
 
@@ -107,7 +111,7 @@ main{
 .contenedor__login-register form{
     width: 100%;
     padding: 80px 20px;
-    background: white;
+    background: var(--background);
     position: absolute;
     border-radius: 20px;
 }
@@ -124,7 +128,7 @@ main{
     margin-top: 20px;
     padding: 10px;
     border: none;
-    background: #F2F2F2;
+    background: var(--cuaternary);
     font-size: 16px;
     outline: none;
 }

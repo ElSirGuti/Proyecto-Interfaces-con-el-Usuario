@@ -1,0 +1,75 @@
+
+@keyframes ts1_move {
+    0%{     
+        /* Inicial tangram */
+    }
+    5%{
+        /* Inicial tangram sale*/
+    }
+    10%{
+        /* Rota a trapecio */
+    }
+    15%{
+        /* Movimiento a trapecio */
+    }
+    25%{
+        /* Inicial trapecio */
+    }
+    30%{
+        /* Inicial trapecio */
+    }
+    35%{
+        /* Inicial trapecio sale*/
+    }
+    40%{
+        /* Rota a cometa */
+    }
+    45%{
+        /* Movimiento a cometa */
+    }
+    50%{
+        /* Inicial a cometa */
+    }    
+    55%{ 
+        /* Inicial a cometa */
+    }
+    60%{ 
+        /* Inicial cometa sale*/
+    }
+    65%{ 
+        /* Rota a persona */
+    }
+    70%{ 
+        /* Se mueve a persona */
+    }
+    75%{ 
+        /* Inicial persona */
+    }
+    80%{ 
+         /* Inicial persona */
+    }
+    85%{ 
+        /* Persona sale */
+    }
+    90%{ 
+        /* Rota a tangram */
+    }
+    95%{ 
+        /* Mueve a tangram */
+    }
+    100%{ 
+        /* Inicial tangram */
+    }
+    
+
+
+
+}
+
+
+
+.tangramstriangulo1 {
+    animation: ts1_move 10s infinite;
+    animation-delay: 2s;
+}
+

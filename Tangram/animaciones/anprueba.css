@@ -1,0 +1,207 @@
+
+
+
+@keyframes girar{
+    from{
+        transform: rotateY(0deg);        
+    }
+    to{
+        transform: rotateY(360deg);
+    }
+}
+
+
+
+
+
+.contenedortangram {
+    display: flex;
+    animation: girar 15s infinite linear;
+    animation-delay: 2s;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+}
+
+
+.tangramstriangulo1 {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateY(111px) translateX(159.7px) rotateZ(-135deg);
+}
+
+
+.tangramstriangulo2 {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateY(5px) translateZ(30px) translateX(180.5px) rotateZ(135deg);
+}
+
+
+.tangramparalelogramo {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateY(177px) translateX(29px) rotateX(180deg) rotateZ(45deg);
+}
+
+.tangramstriangulo3 {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateY(50px) translateX(93px) rotateZ(180deg);
+}
+.tangramstriangulo4 {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateY(0px) translateX(-7px) rotateZ(0deg);
+}
+
+
+
+.tangrammtriangulo {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateY(83.1px) rotateY(0deg) translateX(17px) rotateZ(0deg) ;
+}
+
+
+.tangrambtriangulo1 {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateY(58px) translateX(-164px) rotateY(0deg) rotateZ(-45deg);
+}
+
+
+.tangrambtriangulo2 {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateY(-48px) translateX(-108px) rotateZ(45deg);
+}
+
+.tangramcuadrado {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateY(40.4px) translateX(-140.5px) rotateZ(45deg);
+}
+
+
+.cara {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+
+#Sfront { 
+    border-bottom: solid 50px;
+    border-left: solid transparent 50px;
+    transform: translateZ(25px) translateX(25px);
+}
+#Sback{ 
+    border-bottom: solid 50px;
+    border-left: solid transparent 50px;
+    transform: translateZ(-25px) translateX(25px);
+}
+#Sabsolute1{
+    border-left: solid 50px;
+    transform: translateX(50px) rotateY(90deg) rotateZ(-90deg);
+}
+#Sabsolute2{
+    border-left: solid 50px;
+    transform: translateY(25px) translateX(25px) rotateY(90deg) rotateX(90deg) rotateZ(-90deg);
+}
+#Sabsolute3{
+    border-left: solid 71px;
+    transform: translateX(14.5px) rotateY(90deg) rotateX(-45deg) rotateZ(-90deg);
+}
+
+
+
+#Mfront { 
+    border-bottom: solid 71px;
+    border-left: solid transparent 71px;
+    transform: translateZ(25px);
+}
+#Mback{ 
+    border-bottom: solid 71px;
+    border-left: solid transparent 71px;
+    transform: translateZ(-25px);
+}
+#Mabsolute1{
+    border-left: solid 71px;
+    transform: translateX(35px) translateY(11px) rotateY(90deg) rotateZ(-90deg);
+}
+#Mabsolute2{
+    border-left: solid 71px;
+    transform: translateY(46px) translateX(0px) rotateY(90deg) rotateX(90deg) rotateZ(-90deg);
+}
+#Mabsolute3{
+    border-left: solid 101px;
+    transform: translateX(-15px) translateY(10.5px) rotateY(90deg) rotateX(-45deg) rotateZ(-90deg);
+}
+
+
+#Bfront { 
+    border-bottom: solid 100px;
+    border-left: solid transparent 100px;
+    transform: translateZ(25px);
+}
+#Bback{ 
+    border-bottom: solid 100px;
+    border-left: solid transparent 100px;
+    transform: translateZ(-25px);
+}
+#Babsolute1{
+    border-left: solid 100px;
+    transform: translateX(50px) translateY(25px) rotateY(90deg) rotateZ(-90deg);
+}
+#Babsolute2{
+    border-left: solid 100px;
+    transform: translateY(75px) rotateY(90deg) rotateX(90deg) rotateZ(-90deg);
+}
+#Babsolute3{
+    border-left: solid 141.42px;
+    transform: translateX(-21px) translateY(25px) rotateY(90deg) rotateX(-45deg) rotateZ(-90deg);
+}
+
+
+#Cfront { 
+    border-bottom: solid 50px;
+    transform: translateZ(25px) translateX(25px);
+}
+#Cback{ 
+    border-bottom: solid 50px;
+    transform: translateZ(-25px) translateX(25px);
+}
+#Cabsolute1{
+    border-left: solid 50px;
+    transform: translateX(50px) rotateY(90deg) rotateZ(-90deg);
+}
+#Cabsolute2{
+    border-left: solid 50px;
+    transform: translateY(25px) translateX(25px) rotateY(90deg) rotateX(90deg) rotateZ(-90deg);
+}
+#Cabsolute3{
+    border-left: solid 50px;
+    transform: rotateY(90deg) rotateZ(-90deg);
+}
+#Cabsolute4{
+    border-left: solid 50px;
+    transform: translateY(-25px) translateX(25px) rotateY(90deg) rotateX(90deg) rotateZ(-90deg);
+}

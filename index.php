@@ -1,3 +1,64 @@
+<?php
+$videoBase64 = null;
+
+$conexion = new mysqli('localhost', 'root', '123456789', 'login_register_db');
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
+}
+
+// Obtener el último archivo de la tabla
+$resultado = $conexion->query("SELECT nombre, tipo, contenido FROM archivos ORDER BY id DESC LIMIT 1");
+if ($resultado->num_rows > 0) {
+    $archivo = $resultado->fetch_assoc();
+    // Guardar temporalmente el contenido para incrustarlo
+    $archivoPDF = "data:" . $archivo['tipo'] . ";base64," . base64_encode($archivo['contenido']);
+} else {
+    $mensaje = "No hay archivos disponibles.";
+}
+
+// Obtener el último video
+$resultado = $conexion->query("SELECT tipo, contenido FROM videos ORDER BY id DESC LIMIT 1");
+if ($resultado->num_rows > 0) {
+    $video = $resultado->fetch_assoc();
+    $videoBase64 = "data:" . $video['tipo'] . ";base64," . base64_encode($video['contenido']);
+} else {
+    $mensaje = "No hay videos disponibles.";
+}
+
+// Obtener el último subtítulo
+$result = $conexion->query("SELECT * FROM subtitles ORDER BY fecha_subida DESC LIMIT 1");
+$subtitulo = $result->fetch_assoc();
+
+// Obtener imágenes
+$resultado = $conexion->query("SELECT tipo, contenido FROM imagenes");
+$imagenes = $resultado->fetch_all(MYSQLI_ASSOC);
+
+// Obtener audios
+$audios = [];
+try {
+    $conexion = new mysqli('localhost', 'root', '123456789', 'login_register_db');
+    if ($conexion->connect_error) {
+        throw new Exception("Error de conexión: " . $conexion->connect_error);
+    }
+
+    $query = "SELECT id, audio_name, audio_data FROM audios ORDER BY id ASC LIMIT 3";
+    $resultado = $conexion->query($query);
+
+    if ($resultado) {
+        while ($fila = $resultado->fetch_assoc()) {
+            $audios[] = $fila;
+        }
+        $resultado->free();
+    }
+
+} catch (Exception $e) {
+    echo "<script>alert('Error al cargar los audios: " . $e->getMessage() . "');</script>";
+}
+
+$conexion->close();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +76,34 @@
 
     <!--Custom CSS File Link-->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Todo el tema de las figuras -->
+    <link rel="stylesheet" href="owl.carousel.min.css">
+    <link rel="stylesheet" href="owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="animaciones/anprueba.css">
+    <link rel="stylesheet" href="animaciones/ts1.css">
+    <link rel="stylesheet" href="animaciones/ts2.css">
+    <link rel="stylesheet" href="animaciones/para.css">
+    <link rel="stylesheet" href="animaciones/tm.css">
+    <link rel="stylesheet" href="animaciones/tb1.css">
+    <link rel="stylesheet" href="animaciones/tb2.css">
+    <link rel="stylesheet" href="animaciones/cube.css">
+
+    <style>
+        .owl-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .item {
+            color: aliceblue;
+            justify-content: center;
+            display: flex;
+            height: 600px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -34,6 +123,9 @@
             <a href="#featured">featured</a>
             <a href="#reviews">reviews</a>
             <a href="#contact">contact</a>
+            <a href="wysiwyg.php">Editor</a>
+
+
         </nav>
 
         <div id="login-btn">
@@ -74,16 +166,164 @@
     <!-- Home Section Starts -->
 
     <section class="home" id="home">
-
-        <h1 class="home-parallax" data-speed="-2">find your car</h1>
-        <img class="home-parallax" data-speed="5" src="image/home-img(1).png" alt="">
-        <a href="#" class="btn home-parallax" data-speed="7"> explore cars </a>
-
+        <div class="home-content">
+            <h1 class="home-parallax" data-speed="-2">find your car</h1>
+            <img class="home-parallax" data-speed="5" src="image/home-img(1).png" alt="">
+            <a href="#" class="btn home-parallax" data-speed="7"> explore cars </a>
+        </div>
     </section>
 
     <!-- Home Section Ends -->
 
-    <!-- Icon Section Starts -->
+    <br><br><br><br><br>
+
+
+    <section class="figures">
+        <iframe src="tangram/index.html" style="width: 100%; height: 600px; border: none; overflow: hidden;">
+        </iframe>
+    </section>
+
+
+    <!-- Reproductor de Audio -->
+    <section class="audio-player" style="padding: 2rem; text-align: center;">
+        <h2 class="heading">Reproductor de <span>Audio</span></h2>
+        
+        <div style="max-width: 600px; margin: 0 auto;">
+            <?php foreach ($audios as $index => $audio): ?>
+                <audio id="audio<?= $index ?>" style="display: none;">
+                    <source src="data:audio/mpeg;base64,<?= base64_encode($audio['audio_data']) ?>" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+            <?php endforeach; ?>
+            
+            <div style="margin: 20px 0;">
+                <button id="playAllBtn" class="btn" onclick="togglePlayback()">
+                    <i class="fas fa-play"></i> Reproducir
+                </button>
+            </div>
+            
+            <div id="nowPlaying" style="margin-top: 10px; color: var(--secondary);">
+                <!-- El nombre del audio actual se mostrará aquí -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+    let audioElements = [];
+    let currentAudioIndex = 0;
+    let isPlaying = false;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Obtener todos los elementos de audio
+        audioElements = [
+            document.getElementById('audio0'),
+            document.getElementById('audio1'),
+            document.getElementById('audio2')
+        ];
+
+        // Agregar event listeners para cuando termine cada audio
+        audioElements.forEach((audio, index) => {
+            audio.addEventListener('ended', () => {
+                playNextAudio();
+            });
+        });
+    });
+
+    function togglePlayback() {
+        const playBtn = document.getElementById('playAllBtn');
+        const nowPlaying = document.getElementById('nowPlaying');
+        
+        if (!isPlaying) {
+            // Comenzar reproducción
+            isPlaying = true;
+            playBtn.innerHTML = '<i class="fas fa-stop"></i> Detener';
+            playAudio(currentAudioIndex);
+        } else {
+            // Detener reproducción
+            isPlaying = false;
+            playBtn.innerHTML = '<i class="fas fa-play"></i> Reproducir';
+            stopAllAudios();
+            nowPlaying.textContent = '';
+        }
+    }
+
+    function playAudio(index) {
+        if (!isPlaying) return;
+        
+        stopAllAudios();
+        
+        const audio = audioElements[index];
+        const nowPlaying = document.getElementById('nowPlaying');
+        
+        if (audio) {
+            audio.play();
+            // Mostrar el nombre del audio actual
+            const audioNames = <?= json_encode(array_column($audios, 'audio_name')) ?>;
+            nowPlaying.textContent = `Reproduciendo: ${audioNames[index]}`;
+        }
+    }
+
+    function playNextAudio() {
+        if (!isPlaying) return;
+        
+        currentAudioIndex = (currentAudioIndex + 1) % audioElements.length;
+        playAudio(currentAudioIndex);
+    }
+
+    function stopAllAudios() {
+        audioElements.forEach(audio => {
+            audio.pause();
+            audio.currentTime = 0;
+        });
+    }
+    </script>
+
+    <!-- Relleno -->
+
+    <br><br><br><br>
+
+    <!-- Visualizador de Video -->
+    <section class="videito">
+        <?php if ($videoBase64): ?>
+            <!-- Contenedor centrado para el video -->
+            <div style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+                <video controls width="600" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                    <source src="<?= $videoBase64 ?>" type="<?= $video['tipo'] ?>">
+
+                    <?php if ($subtitulo): ?>
+                        <!-- Subtítulo dinámico -->
+                        <track src="data:<?= $subtitulo['tipo'] ?>;base64,<?= base64_encode($subtitulo['contenido']) ?>"
+                            kind="subtitles" srclang="es" label="Español">
+                    <?php endif; ?>
+
+                    Tu navegador no soporta la reproducción de videos.
+                </video>
+            </div>
+        <?php else: ?>
+            <!-- Mensaje si no hay videos -->
+            <div style="display: flex; align-items: center; justify-content: center; height: 50vh;">
+                <p><?= htmlspecialchars($mensaje) ?></p>
+            </div>
+        <?php endif; ?>
+    </section>
+
+    <!-- Vehicles Section Starts -->
+
+    <section class="vehicles" id="vehicles">
+        <h1 class="heading">popular <span>vehicles</span></h1>
+        <div class="swiper vehicles-slider">
+            <div class="swiper-wrapper">
+                <?php foreach ($imagenes as $imagen): ?>
+                    <div class="swiper-slide box">
+                        <img src="data:<?= $imagen['tipo'] ?>;base64,<?= base64_encode($imagen['contenido']) ?>"
+                            alt="Vehicle Image">
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vehicles Section Ends -->
 
     <section class="icons-container">
 
@@ -123,122 +363,6 @@
 
     <!-- Icon Section Ends -->
 
-    <!-- Vehicles Section Starts -->
-
-    <section class="vehicles" id="vehicles">
-
-        <h1 class="heading"> popular <span>vehicles</span></h1>
-
-        <div class="swiper vehicles-slider">
-
-            <div class="swiper-wrapper">
-
-                <div class="swiper-slide box">
-                    <img src="image/vehicle-1.png" alt="">
-                    <div class="content">
-                        <h3>Porsche 911 (992)</h3>
-                        <div class="price"> <span>price: </span>$101,200/-</div>
-                        <p>
-                            new
-                            <span class="fas fa-circle"></span> 2022
-                            <span class="fas fa-circle"></span> automatic
-                            <span class="fas fa-circle"></span> petrol
-                            <span class="fas fa-circle"></span> 3.0 Flat 6 Cylinder Engine
-                        </p>
-                        <a href="#" class="btn">check out</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <img src="image/vehicle-3.png" alt="">
-                    <div class="content">
-                        <h3>Porsche 911 GT3</h3>
-                        <div class="price"> <span>price: </span>$223,800/-</div>
-                        <p>
-                            new
-                            <span class="fas fa-circle"></span> 2019
-                            <span class="fas fa-circle"></span> automatic
-                            <span class="fas fa-circle"></span> petrol
-                            <span class="fas fa-circle"></span> 4.0 Flat 6 Cylinder Engine
-                        </p>
-                        <a href="#" class="btn">check out</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <img src="image/vehicle-2.png" alt="">
-                    <div class="content">
-                        <h3>Porsche 911 GT2 RS</h3>
-                        <div class="price"> <span>price: </span>$344,900/-</div>
-                        <p>
-                            new
-                            <span class="fas fa-circle"></span> 2019
-                            <span class="fas fa-circle"></span> automatic
-                            <span class="fas fa-circle"></span> petrol
-                            <span class="fas fa-circle"></span> 3.8 Flat 6 Cylinder Engine
-                        </p>
-                        <a href="#" class="btn">check out</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <img src="image/vehicle-4.png" alt="">
-                    <div class="content">
-                        <h3>Porsche 911 R (991.1)</h3>
-                        <div class="price"> <span>price: </span>$393,238/-</div>
-                        <p>
-                            new
-                            <span class="fas fa-circle"></span> 2016
-                            <span class="fas fa-circle"></span> automatic
-                            <span class="fas fa-circle"></span> petrol
-                            <span class="fas fa-circle"></span> 4.0 Flat 6 Cylinder Engine
-                        </p>
-                        <a href="#" class="btn">check out</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <img src="image/vehicle-5.png" alt="">
-                    <div class="content">
-                        <h3>Porsche Taycan Turbo S</h3>
-                        <div class="price"> <span>price: </span>$187,400/-</div>
-                        <p>
-                            new
-                            <span class="fas fa-circle"></span> 2023
-                            <span class="fas fa-circle"></span> automatic
-                            <span class="fas fa-circle"></span> electric
-                            <span class="fas fa-circle"></span> 93.4 kWh Lithium Ion 800 Volt Battery
-                        </p>
-                        <a href="#" class="btn">check out</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <img src="image/vehicle-6.png" alt="">
-                    <div class="content">
-                        <h3>Porsche 718 Cayman GT4</h3>
-                        <div class="price"> <span>price: </span>$143,050/-</div>
-                        <p>
-                            new
-                            <span class="fas fa-circle"></span> 2022
-                            <span class="fas fa-circle"></span> automatic
-                            <span class="fas fa-circle"></span> petrol
-                            <span class="fas fa-circle"></span> 4.0 Flat 6 Cylinder Engine
-                        </p>
-                        <a href="#" class="btn">check out</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-pagination"></div>
-
-        </div>
-
-
-
-    </section>
-
-    <!-- Vehicles Section Ends -->
 
     <!-- Services Section Starts -->
 
@@ -616,6 +740,7 @@
                 <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a>
                 <a href="#"> <i class="fas fa-envelope"></i> contacto.elsirguti@gmail.com </a>
                 <a href="#"> <i class="fas fa-map-marker-alt"></i> caracas, venezuela - 1060 </a>
+                <a href="mostrar.php"> <i class="fas fa-arrow-right"></i> Terminos de Uso </a>
             </div>
 
             <div class="box">
@@ -632,23 +757,31 @@
 
         </div>
 
-        <div class="credit"> created by Andres Gutierrez | all rights reserved! </div>
+        <div class="credit"> Creado por Andres Gutierrez y Jose Ramirez | all rights reserved! </div>
 
     </section>
 
     <!-- Footer Section Ends -->
 
 
+    <script src="jquery.min.js"></script>
+    <script src="owl.carousel.min.js"></script>
+    <script src="main.js"></script>
+
+
+
 
 
     <!-- Script to update colors on all pages -->
     <script>
+        // Función para actualizar los colores desde localStorage
         function updateColorsOnAllPages() {
             const root = document.documentElement;
             const primaryColor = localStorage.getItem('primaryColor');
             const secondaryColor = localStorage.getItem('secondaryColor');
             const tertiaryColor = localStorage.getItem('tertiaryColor');
             const cuaternaryColor = localStorage.getItem('cuaternaryColor');
+            const backgroundColor = localStorage.getItem('backgroundColor');
 
             if (primaryColor) {
                 root.style.setProperty('--primary', primaryColor);
@@ -665,11 +798,22 @@
             if (cuaternaryColor) {
                 root.style.setProperty('--cuaternary', cuaternaryColor);
             }
+
+            if (backgroundColor) {
+                root.style.setProperty('--background', backgroundColor);
+                document.body.style.backgroundColor = backgroundColor;
+            }
         }
 
+        // Cargar los colores cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', updateColorsOnAllPages);
+
+        // También actualizar los colores inmediatamente
         updateColorsOnAllPages();
     </script>
 
+    <!-- Script to handle font changes -->
+    <script src="font-changer.js"></script>
 
     <!-- Contact Section Ends -->
 

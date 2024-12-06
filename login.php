@@ -1,13 +1,9 @@
 <?php
-
 session_start();
 
 if (isset($_SESSION['usuario'])) {
     header("location: dashboard.php");
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -68,14 +64,17 @@ if (isset($_SESSION['usuario'])) {
     </main>
 
     <script src="assets/js/script.js"></script>
+    
     <!-- Script to update colors on all pages -->
     <script>
+        // Función para actualizar los colores desde localStorage
         function updateColorsOnAllPages() {
             const root = document.documentElement;
             const primaryColor = localStorage.getItem('primaryColor');
             const secondaryColor = localStorage.getItem('secondaryColor');
             const tertiaryColor = localStorage.getItem('tertiaryColor');
             const cuaternaryColor = localStorage.getItem('cuaternaryColor');
+            const backgroundColor = localStorage.getItem('backgroundColor');
 
             if (primaryColor) {
                 root.style.setProperty('--primary', primaryColor);
@@ -92,10 +91,25 @@ if (isset($_SESSION['usuario'])) {
             if (cuaternaryColor) {
                 root.style.setProperty('--cuaternary', cuaternaryColor);
             }
+
+            if (backgroundColor) {
+                root.style.setProperty('--background', backgroundColor);
+                document.body.style.backgroundColor = backgroundColor;
+            }
         }
 
+        // Cargar los colores cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', updateColorsOnAllPages);
+
+        // También actualizar los colores inmediatamente
         updateColorsOnAllPages();
     </script>
+
+    <!-- Script to handle font changes -->
+    <script src="font-changer.js"></script>
+
+    <!-- Script to apply font sizes -->
+    <script src="font-sizes.js"></script>
 </body>
 
 </html>

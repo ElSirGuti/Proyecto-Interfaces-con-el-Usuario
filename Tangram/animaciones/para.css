@@ -1,0 +1,56 @@
+
+@keyframes para_move {
+    0%{ 
+        transform: translateY(57.2px) translateX(73.2px) rotateX(180deg) rotateZ(90deg); /* Inicial trapecio */
+    }
+    7%{
+        transform: translateY(57.2px) translateX(73.2px) rotateX(180deg) rotateZ(90deg) translateZ(120px); /* Inicial trapecio sale*/
+    }
+    14%{
+        transform: translateY(57.2px) translateX(73.2px) rotateX(180deg) rotateZ(180deg) translateZ(120px); /* Rota a cometa */
+    }
+    21%{
+        transform: translateY(100px) translateX(86px) rotateZ(180deg) translateZ(120px);/* Movimiento a cometa */
+    }
+    28%{
+        transform: translateY(100px) translateX(86px) rotateZ(180deg); /* Inicial a cometa */
+    }
+    35%{
+        transform: translateY(100px) translateX(86px) rotateZ(180deg); /* Inicial a cometa */
+    }
+    42%{
+        transform: translateY(100px) translateX(86px) rotateZ(180deg) translateZ(120px);/* Inicial cometa sale*/
+    }
+    49%{
+        transform: translateY(100px) translateX(86px) rotateX(180deg) rotateZ(180deg) translateZ(120px);/* Rota a persona */
+    }
+    56%{
+        transform: translateY(195px) translateX(30px) rotateX(180deg) rotateZ(-20deg) translateZ(120px); /* Se mueve a persona */
+    }
+    63%{
+        transform: translateY(195px) translateX(30px) rotateX(180deg) rotateZ(-20deg); /* Inicial persona */
+    }    
+    70%{ 
+        transform: translateY(195px) translateX(30px) rotateX(180deg) rotateZ(-20deg); /* Inicial persona */
+    }
+    77%{ 
+        transform: translateY(195px) translateX(30px) rotateX(180deg) rotateZ(-20deg) translateZ(120px); /* Persona sale */
+    }
+    84%{ 
+        transform: translateY(195px) translateX(30px) rotateX(180deg) rotateZ(90deg) translateZ(120px); /* Rota a trapecio */
+    }
+    91%{ 
+        transform: translateY(57.2px) translateX(73.2px) rotateX(180deg) rotateZ(90deg) translateZ(120px); /* Mov a trapecio */
+    }
+    100%{ 
+        transform: translateY(57.2px) translateX(73.2px) rotateX(180deg) rotateZ(90deg); /* Inicial trapecio */
+    }
+
+}
+
+
+.tangramparalelogramo {
+    animation: para_move 12s infinite;
+    animation-delay: 2s;
+}
+

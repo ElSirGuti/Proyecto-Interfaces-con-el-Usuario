@@ -1,0 +1,211 @@
+@keyframes girarp {
+    from{
+        transform: rotateY(0deg);
+    } 
+    to {
+        transform: rotateY(360deg);
+    }
+}
+    
+
+.contenedorperson {
+    margin:auto;
+    margin-top: 100px;
+    perspective: 1000px;
+    display: flex;
+    animation: girarp 5s infinite linear; 
+    transform-style: preserve-3d; 
+}
+
+
+.personstriangulo1 {
+    color: turquoise;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d; 
+    transform: translateY(205px) translateX(235px) rotateZ(90deg);
+}
+
+.personstriangulo2 {
+    color: red;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d; 
+    transform: translateY(185px) translateX(25px) rotateZ(180deg);
+}
+
+
+.persontrapecio {
+    color: blue;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d; 
+    transform: translateY(195px) translateX(30px) rotateX(180deg) rotateZ(-20deg);
+}
+
+.personstriangulo3 {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d; 
+    transform: translateY(50px) translateX(93px) rotateZ(180deg);
+}
+.personstriangulo4 {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d; 
+    transform: translateY(0px) translateX(-7px) rotateZ(0deg);
+}
+
+
+
+.personmtriangulo {
+    color:  purple;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d; 
+    transform: translateY(180px) translateX(-35px) rotateZ(-115deg) ;
+}
+
+
+.personbtriangulo1 {
+    color: orange;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d; 
+    transform: translateY(40px) translateX(-30px) rotateZ(20deg);
+}
+
+.personbtriangulo2 {
+    color: cyan;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d; 
+    transform: translateY(75px) translateX(0px) rotateZ(200deg);
+}
+
+.personcuadrado {
+    color: greenyellow;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d; 
+    transform: translateY(-50px) translateX(-100px) rotateZ(10deg);
+}
+
+
+.cara {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+
+#Sfront { 
+    border-bottom: solid 50px;
+    border-left: solid transparent 50px;
+    transform: translateZ(25px) translateX(25px);
+}
+#Sback{ 
+    border-bottom: solid 50px;
+    border-left: solid transparent 50px;
+    transform: translateZ(-25px) translateX(25px);
+}
+#Sabsolute1{
+    border-left: solid 50px;
+    transform: translateX(50px) rotateY(90deg) rotateZ(-90deg);
+}
+#Sabsolute2{
+    border-left: solid 50px;
+    transform: translateY(25px) translateX(25px) rotateY(90deg) rotateX(90deg) rotateZ(-90deg);
+}
+#Sabsolute3{
+    border-left: solid 71px;
+    transform: translateX(14.5px) rotateY(90deg) rotateX(-45deg) rotateZ(-90deg);
+}
+
+
+
+#Mfront { 
+    border-bottom: solid 72px;
+    border-left: solid transparent 72px;
+    transform: translateZ(25px);
+}
+#Mback{ 
+    border-bottom: solid 72px;
+    border-left: solid transparent 72px;
+    transform: translateZ(-25px);
+}
+#Mabsolute1{
+    border-left: solid 72px;
+    transform: translateX(36px) translateY(11px) rotateY(90deg) rotateZ(-90deg);
+}
+#Mabsolute2{
+    border-left: solid 72px;
+    transform: translateY(47px) rotateY(90deg) rotateX(90deg) rotateZ(-90deg);
+}
+#Mabsolute3{
+    border-left: solid 102px;
+    transform: translateX(-15px) translateY(11px) rotateY(90deg) rotateX(-45deg) rotateZ(-90deg);
+}
+
+
+#Bfront { 
+    border-bottom: solid 102px;
+    border-left: solid transparent 102px;
+    transform: translateZ(25px);
+}
+#Bback{ 
+    border-bottom: solid 102px;
+    border-left: solid transparent 102px;
+    transform: translateZ(-25px);
+}
+#Babsolute1{
+    border-left: solid  102px;
+    transform: translateX(51px) translateY(26px) rotateY(90deg) rotateZ(-90deg);
+}
+#Babsolute2{
+    border-left: solid  102px;
+    transform: translateY(77px) rotateY(90deg) rotateX(90deg) rotateZ(-90deg);
+}
+#Babsolute3{
+    border-left: solid  144px;
+    transform: translateX(-21px) translateY(26px) rotateY(90deg) rotateX(-45deg) rotateZ(-90deg);
+}
+
+
+#Cfront { 
+    border-bottom: solid 50px;
+    transform: translateZ(25px) translateX(25px);
+}
+#Cback{ 
+    border-bottom: solid 50px;
+    transform: translateZ(-25px) translateX(25px);
+}
+#Cabsolute1{
+    border-left: solid 50px;
+    transform: translateX(50px) rotateY(90deg) rotateZ(-90deg);
+}
+#Cabsolute2{
+    border-left: solid 50px;
+    transform: translateY(25px) translateX(25px) rotateY(90deg) rotateX(90deg) rotateZ(-90deg);
+}
+#Cabsolute3{
+    border-left: solid 50px;
+    transform: rotateY(90deg) rotateZ(-90deg);
+}
+#Cabsolute4{
+    border-left: solid 50px;
+    transform: translateY(-25px) translateX(25px) rotateY(90deg) rotateX(90deg) rotateZ(-90deg);
+}
+
+
+
+
