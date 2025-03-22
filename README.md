@@ -118,40 +118,22 @@ Si tienes alguna pregunta o sugerencia, no dudes en contactarme:
 
 ## Landing Page
 
-![alt text](.png)
+![alt text](Imagenes_README/landing.png)
 
 ## Panel de personalización
 
-![alt text](.png)
+![alt text](Imagenes_README/personalizacion.png)
 
 ## Panel de editar usuario
 
-![alt text](.png)
-![alt text](.png)
+![alt text](Imagenes_README/editar1.png)
+![alt text](Imagenes_README/editar2.png)
 
 ## Panel de subida de archivos
-![alt text](.png)
+![alt text](Imagenes_README/subida.png)
 
 ## Panel del Manual de Usuario
-![alt text](.png)
+![alt text](Imagenes_README/manual.png)
 
 ## WYSIWYG
-![alt text](.png)
-
-## Panel de personalización
-
-![alt text](.png)
-
-## Panel de editar usuario
-
-![alt text](.png)
-![alt text](.png)
-
-## Panel de subida de archivos
-![alt text](.png)
-
-## Panel del Manual de Usuario
-![alt text](.png)
-
-## WYSIWYG
-![alt text](.png)
+![alt text](Imagenes_README/wysiwyg.png)
